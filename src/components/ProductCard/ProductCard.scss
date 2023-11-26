@@ -1,0 +1,154 @@
+$button_color: #c24b5a;
+$button_disabled_color: #d4949d;
+$button_border_color: #dfdddd;
+$white: #ffffff;
+
+.MuiCard-root.product_card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.card_body {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.card_body_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.MuiButtonBase-root.MuiButton-root,
+.MuiButtonBase-root.MuiIconButton-root {
+  &:hover {
+    opacity: 0.8;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+#search_button {
+  &:hover {
+    background-color: $button_color;
+  }
+  &:disabled {
+    background-color: $button_disabled_color;
+    border-color: $button_disabled_color;
+  }
+}
+
+.quantity_buttons_group button.quantity_buttons_group_button {
+  min-width: 25px;
+  width: 25px;
+  height: 25px;
+  font-size: 18px;
+  color: $button_color;
+  border-color: $button_color;
+  border-bottom-color: $button_color;
+
+  &.MuiButtonGroup-firstButton,
+  &.MuiButtonGroup-middleButton,
+  &.MuiButtonGroup-lastButton {
+    border-radius: 4px;
+  }
+
+  &.MuiButtonGroup-middleButton {
+    height: 30px;
+  }
+
+  &.MuiButtonGroup-middleButton:disabled {
+    background-color: transparent;
+    color: #353535;
+  }
+
+  &.decrement_button {
+    border-bottom-color: $button_color;
+  }
+
+  &.quantity_buttons_group_button:hover {
+    border-color: $button_color;
+  }
+}
+
+.rating_container {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.MuiTypography-root.rating_count {
+  margin-left: 5px;
+}
+
+.price_container {
+  display: flex;
+}
+
+.current_price {
+  color: $button_color;
+}
+
+.MuiTypography-root.previous_price {
+  margin-left: 5px;
+  text-decoration: line-through;
+  color: rgb(143, 140, 140);
+}
+
+.item_manipulations {
+  position: absolute;
+  bottom: 10%;
+  left: 40%;
+  opacity: 0;
+  visibility: hidden;
+  border: 1px solid $button_border_color;
+  border-radius: 2px;
+  background-color: $white;
+  transform: translateX(-40%);
+  transform: translateY(50%);
+  transition: all 0.3s ease-in-out;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+button.add_to_cart_button {
+  border-right: 1px solid $button_border_color;
+  border-bottom-right-radius: 0%;
+  border-top-right-radius: 0%;
+
+  &.MuiIconButton-root:hover {
+    background-color: $white;
+    border-color: $button_border_color;
+  }
+}
+
+button.remove_from_cart_button {
+  &:hover {
+    background-color: $white;
+  }
+}
+
+.card_media_wrapper {
+  position: relative;
+}
+
+.MuiChip-root.discount_chip {
+  position: absolute;
+  top: 10px;
+  left: 16px;
+  color: $white;
+  background-color: $button_color;
+  transform: translateX(0px);
+}
