@@ -1,4 +1,8 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders } from 'axios'
+
+interface AdaptAxiosRequestConfig extends AxiosRequestConfig {
+  headers: AxiosRequestHeaders
+}
 
 const instance: AxiosInstance = axios.create({
   baseURL: 'https://linkedin-cv-crawler.beta-limited.workers.dev/interview',
@@ -9,7 +13,7 @@ const instance: AxiosInstance = axios.create({
 })
 
 instance.interceptors.request.use(
-  async (config: AxiosRequestConfig) => {
+  async (config: AdaptAxiosRequestConfig) => {
     try {
       const sessionKey = localStorage.getItem('sessionKey')
 
