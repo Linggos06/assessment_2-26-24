@@ -9,7 +9,8 @@ import { CartItemType } from '../../types/Cart'
 
 const Cart = () => {
   const { entities } = useSelector(selectCart)
-  const items: CartItemType[] = JSON.parse(localStorage.getItem('cart') || '[]')
+  const items: CartItemType[] =
+    entities.length > 0 ? entities : JSON.parse(localStorage.getItem('cart') || '[]')
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
   const handlePopoverOpen = (event: MouseEvent<HTMLElement>) => {
