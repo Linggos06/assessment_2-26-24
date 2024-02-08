@@ -19,10 +19,10 @@ const ProductCard = ({ id, name, image, originalPrice, price, rating, discount }
   }
 
   const fruitImage = image?.includes('lime')
-    ? '../../../public/lemon.png'
+    ? '/lemon.png'
     : image?.includes('strawberry')
-      ? '../../../public/strawberry.png'
-      : '../../../public/orange.png'
+      ? '/strawberry.png'
+      : '/orange.png'
 
   return (
     <Card className="product_card">
