@@ -18,16 +18,23 @@ const ProductCard = ({ id, name, image, originalPrice, price, rating, discount }
     setItemCount((prev) => prev - 1)
   }
 
+  const fruitImage = image?.includes('lime')
+    ? '../../../public/lemon.png'
+    : image?.includes('strawberry')
+      ? '../../../public/strawberry.png'
+      : '../../../public/orange.png'
+
   return (
     <Card className="product_card">
       <div className="card_media_wrapper">
         <CardMedia
-          component="div"
+          component="img"
           sx={{
-            // 16:9
-            pt: '56.25%'
+            height: 200,
+            padding: '10px',
+            objectFit: 'contain'
           }}
-          image={image}
+          image={fruitImage}
         />
         <Chip label={discount} className="discount_chip" />
         <CartActions {...{ id, itemCount }} />
