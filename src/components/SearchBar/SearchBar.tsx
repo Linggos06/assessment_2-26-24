@@ -1,36 +1,18 @@
-import { useState, ChangeEvent } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch } from '../../config/store/store'
-import { fetchCardsByName, selectCards } from '../../config/store/cardsSlice'
-import { Stack, Button, InputBase } from '@mui/material'
+import { useState } from 'react'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { Stack, Button, InputBase, Select, MenuItem, SelectChangeEvent } from '@mui/material'
 import { styled } from '@mui/material/styles'
+
 import SearchIcon from '@mui/icons-material/Search'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
 import './SearchBar.scss'
 
-const SearchWrapper = styled('div')(({ theme }) => ({
+const SearchWrapper = styled('div')(() => ({
   position: 'relative',
-  maxWidth: 450,
+  display: 'flex',
   width: '100%',
-  marginLeft: 0,
-  borderRadius: theme.shape.borderRadius,
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3)
-  }
-}))
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  display: 'none',
-  position: 'absolute',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '100%',
-  padding: theme.spacing(0, 2),
-  pointerEvents: 'none',
-  color: '#b0a695',
-  [theme.breakpoints.up('sm')]: {
-    display: 'flex'
-  }
+  marginLeft: 0
 }))
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -39,29 +21,52 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     width: 'inherit',
     padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: 18,
-    border: '1px solid #dadada',
+    paddingTop: 7,
+    paddingLeft: 12,
+    border: '1px solid #89919A',
     borderRight: 'none',
-    borderTopLeftRadius: 20,
-    borderBottomLeftRadius: 20,
-    transition: theme.transitions.create('width'),
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`
-    }
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    fontSize: 16,
+    color: '#74777A',
+    transition: theme.transitions.create('width')
+  }
+}))
+
+const StyledSelect = styled(Select)(() => ({
+  maxWidth: '132px',
+  width: '100%',
+  fontSize: 14,
+  lineHeight: 2,
+  backgroundColor: '#F4F5F6',
+  border: '1px solid #89919A',
+  borderLeft: 'none',
+  borderRadius: 0,
+  borderTopRightRadius: 5,
+  borderBottomRightRadius: 5,
+  boxShadow: 'none',
+  textTransform: 'none',
+  '& .MuiSelect-select': {
+    paddingTop: 5,
+    paddingBottom: 5,
+    border: 'none'
+  },
+  '& .MuiOutlinedInput-notchedOutline': {
+    border: 'none'
   }
 }))
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  width: 60,
-  fontSize: 12,
+  width: 110,
+  height: 40,
+  fontSize: 16,
   lineHeight: 2,
-  paddingTop: 7,
-  paddingBottom: 8,
-  backgroundColor: '#c24b5a',
-  border: '1px solid #c24b5a',
-  borderRadius: 0,
-  borderTopRightRadius: 20,
-  borderBottomRightRadius: 20,
+  paddingLeft: 13,
+  backgroundColor: '#0059BC',
+  border: '1px solid #0059BC',
+  borderRadius: 5,
+  marginLeft: 13,
+  textAlign: 'center',
   boxShadow: 'none',
   textTransform: 'none',
   '.MuiButtonBase-root-MuiButton-root:hover': {
@@ -70,26 +75,29 @@ const StyledButton = styled(Button)(({ theme }) => ({
     boxShadow: 'none'
   },
   [theme.breakpoints.up('sm')]: {
-    maxWidth: 150,
+    maxWidth: 110,
     width: '100%',
-    paddingTop: 6,
-    paddingBottom: 5,
-    fontSize: 14
+    marginLeft: 13,
+    fontSize: 16
+  },
+  [theme.breakpoints.down(481)]: {
+    maxWidth: 110,
+    width: '100%',
+    marginLeft: 0,
+    fontSize: 16,
+    borderBottomLeftRadius: 0,
+    borderTopLeftRadius: 0
   }
 }))
 const SearchBar = () => {
-  const dispatch = useDispatch<AppDispatch>()
-  const { loading } = useSelector(selectCards)
+  const matchesMobile = useMediaQuery('(max-width:480px)')
 
-  const [inputValue, setInputValue] = useState('')
+  const [selectedValue, setSelectedValue] = useState('')
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value)
+  const handleChange = (event: SelectChangeEvent<unknown>) => {
+    setSelectedValue(event.target.value as string)
   }
-  const handleSearch = () => {
-    if (!inputValue) return
-    dispatch(fetchCardsByName(inputValue))
-  }
+
   return (
     <Stack
       className="search_bar"
@@ -98,23 +106,48 @@ const SearchBar = () => {
       alignItems="flex-start"
       spacing={0}>
       <SearchWrapper>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
         <StyledInputBase
-          placeholder="Search"
+          placeholder="Search..."
           inputProps={{
             'aria-label': 'search'
           }}
-          onChange={handleChange}
         />
+        {!matchesMobile && (
+          <StyledSelect
+            className="select_category"
+            value={selectedValue}
+            onChange={handleChange}
+            displayEmpty
+            renderValue={(selected) => {
+              if (!selected) {
+                return <em>Categories</em>
+              }
+              if (typeof selected === 'string') {
+                return <em>{selected.length > 1 ? selected : 'Category Name'}</em>
+              }
+            }}
+            IconComponent={KeyboardArrowDownIcon}>
+            {[1, 2, 3, 4, 5].map((num, i) => {
+              if (i === 0) {
+                return (
+                  <MenuItem key={num} value="Data">
+                    Data
+                  </MenuItem>
+                )
+              } else {
+                return (
+                  <MenuItem key={num} value={num + ''}>
+                    Category Name
+                  </MenuItem>
+                )
+              }
+            })}
+          </StyledSelect>
+        )}
       </SearchWrapper>
-      <StyledButton
-        id="search_button"
-        variant="contained"
-        onClick={handleSearch}
-        disabled={loading === 'pending'}>
-        Search
+
+      <StyledButton id="search_button" variant="contained">
+        <SearchIcon />
       </StyledButton>
     </Stack>
   )

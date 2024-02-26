@@ -1,40 +1,40 @@
-import { ReactNode } from 'react'
-import { Box, CardContent, Rating, Typography } from '@mui/material'
+import { Box, CardContent, Typography } from '@mui/material'
+
+import './ProductCard.scss'
 
 type CardBodyType = {
+  id: number
   name: string
-  rating: number
-  price: number
-  originalPrice: number
-  children: ReactNode
+  price: string
+  description: string
+  shippingMethod: string
 }
 
-const CardBody = ({ name, rating, price, originalPrice, children }: CardBodyType) => {
+const CardBody = ({ id, name, price, description, shippingMethod }: CardBodyType) => {
   return (
     <CardContent className="card_body">
       <Box className="card_body_container">
-        <Typography variant="h6" gutterBottom>
+        <Typography
+          className="card_title"
+          variant="subtitle1"
+          gutterBottom
+          sx={{ paddingLeft: '8px' }}>
           {name}
         </Typography>
-        <Box className="rating_container">
-          <Rating name="rating" defaultValue={rating} readOnly />
-          <Typography className="rating_count" gutterBottom>
-            {`(${rating})`}
-          </Typography>
-        </Box>
+
         <Box className="price_container">
-          <Typography className="current_price" variant="subtitle1">
-            {price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-          </Typography>
-          <Typography className="previous_price" variant="subtitle1">
-            {originalPrice.toLocaleString('en-US', {
-              style: 'currency',
-              currency: 'USD'
-            })}
+          <Typography className="current_price" variant="subtitle2" sx={{ paddingLeft: '8px' }}>
+            {price} {' TL'}
           </Typography>
         </Box>
+        <Typography className="description_title">Description</Typography>
+        <input className="hack_input" type="checkbox" id={'expanded' + id}></input>
+        <Typography className="product_description">{description}</Typography>
+        <label className="read_more" htmlFor={'expanded' + id} role="button">
+          devamını gör
+        </label>
+        <Typography className="shipping_method">{shippingMethod}</Typography>
       </Box>
-      {children}
     </CardContent>
   )
 }

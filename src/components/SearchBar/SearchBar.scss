@@ -1,3 +1,27 @@
 .MuiStack-root.search_bar {
   flex-grow: 1;
+  justify-content: flex-end;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    margin-top: 24px;
+    margin-bottom: 20px;
+  }
+}
+
+.MuiMenu-paper.MuiPopover-paper {
+  top: 76px !important;
+  background-color: #00254f;
+  color: #ffffff;
+  padding: 5px 12px;
+
+  & .MuiMenu-list li {
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 4px 17px 4px 8px;
+
+    &:hover {
+      background-color: #0059bc;
+    }
+  }
 }

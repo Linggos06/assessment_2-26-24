@@ -1,0 +1,38 @@
+.MuiListItem-root.menu_tab {
+  min-width: auto;
+  font-size: 14px;
+  text-transform: none;
+  color: #6a6d70;
+
+  &:hover {
+    color: #32363a;
+  }
+  &:hover::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    height: 2px;
+    width: calc(100% - 16px);
+    background-color: #0059bc;
+  }
+}
+
+.arrow_down_icon {
+  transform: rotate(0deg);
+  &.active {
+    transform: rotate(180deg);
+  }
+}
+
+.menu-item_dropdown-menu .MuiMenu-paper.MuiPopover-paper {
+  top: 162px !important;
+  background-color: #f4f5f6;
+  color: #6a6d70;
+
+  & .MuiMenu-list li:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}

@@ -1,36 +1,23 @@
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from './config/store/store'
-import { fetchCards } from './config/store/cardsSlice'
-import { CssBaseline, Container, Box } from '@mui/material'
+import { CssBaseline, useMediaQuery } from '@mui/material'
 import Header from './components/Header'
-import CardContainer from './components/CardContainer'
+import Menu from './components/Menu'
+import Hero from './components/Hero'
+import Products from './components/Products'
+import Footer from './components/Footer'
 
 import './App.scss'
 
 const App = () => {
-  const dispatch = useDispatch<AppDispatch>()
-
-  useEffect(() => {
-    dispatch(fetchCards())
-  }, [])
+  const matchesMobile = useMediaQuery('(max-width:480px)')
 
   return (
     <>
       <CssBaseline />
       <Header />
-      <main>
-        <Box
-          sx={{
-            bgcolor: 'background.paper',
-            pt: 8,
-            pb: 6
-          }}
-        />
-        <Container sx={{ py: 8 }} maxWidth="md">
-          <CardContainer />
-        </Container>
-      </main>
+      {!matchesMobile && <Menu />}
+      <Hero />
+      <Products />
+      <Footer />
     </>
   )
 }

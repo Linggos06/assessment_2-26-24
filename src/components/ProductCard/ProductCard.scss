@@ -1,17 +1,16 @@
-$button_color: #c24b5a;
-$button_disabled_color: #d4949d;
-$button_border_color: #dfdddd;
 $white: #ffffff;
 
 .MuiCard-root.product_card {
   display: flex;
   flex-direction: column;
   height: 100%;
+  cursor: pointer;
 }
-.card_body {
+.MuiCardContent-root.card_body {
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
+  padding: 0px 12px 12px !important;
 }
 
 .card_body_container {
@@ -39,116 +38,108 @@ $white: #ffffff;
 
 #search_button {
   &:hover {
-    background-color: $button_color;
-  }
-  &:disabled {
-    background-color: $button_disabled_color;
-    border-color: $button_disabled_color;
+    background-color: #646cff;
   }
 }
 
-.quantity_buttons_group button.quantity_buttons_group_button {
-  min-width: 25px;
-  width: 25px;
-  height: 25px;
-  font-size: 18px;
-  color: $button_color;
-  border-color: $button_color;
-  border-bottom-color: $button_color;
-
-  &.MuiButtonGroup-firstButton,
-  &.MuiButtonGroup-middleButton,
-  &.MuiButtonGroup-lastButton {
-    border-radius: 4px;
-  }
-
-  &.MuiButtonGroup-middleButton {
-    height: 30px;
-  }
-
-  &.MuiButtonGroup-middleButton:disabled {
-    background-color: transparent;
-    color: #353535;
-  }
-
-  &.decrement_button {
-    border-bottom-color: $button_color;
-  }
-
-  &.quantity_buttons_group_button:hover {
-    border-color: $button_color;
-  }
-}
-
-.rating_container {
-  display: flex;
-  margin-bottom: 5px;
-}
-
-.MuiTypography-root.rating_count {
-  margin-left: 5px;
+.MuiTypography-root.card_title {
+  font-weight: 500;
 }
 
 .price_container {
   display: flex;
+  background-color: #e6eef8;
 }
 
-.current_price {
-  color: $button_color;
-}
-
-.MuiTypography-root.previous_price {
-  margin-left: 5px;
-  text-decoration: line-through;
-  color: rgb(143, 140, 140);
-}
-
-.item_manipulations {
-  position: absolute;
-  bottom: 10%;
-  left: 40%;
-  opacity: 0;
-  visibility: hidden;
-  border: 1px solid $button_border_color;
-  border-radius: 2px;
-  background-color: $white;
-  transform: translateX(-40%);
-  transform: translateY(50%);
-  transition: all 0.3s ease-in-out;
-
-  &.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-}
-
-button.add_to_cart_button {
-  border-right: 1px solid $button_border_color;
-  border-bottom-right-radius: 0%;
-  border-top-right-radius: 0%;
-
-  &.MuiIconButton-root:hover {
-    background-color: $white;
-    border-color: $button_border_color;
-  }
-}
-
-button.remove_from_cart_button {
-  &:hover {
-    background-color: $white;
-  }
+.MuiTypography-root.current_price {
+  font-weight: 600;
+  line-height: 24px;
 }
 
 .card_media_wrapper {
   position: relative;
 }
 
-.MuiChip-root.discount_chip {
+.MuiChip-root.like_chip {
   position: absolute;
-  top: 10px;
-  left: 16px;
+  top: 23px;
+  right: 23px;
+  width: 24px;
+  height: 24px;
   color: $white;
-  background-color: $button_color;
+  z-index: 999;
+  background-color: $white;
   transform: translateX(0px);
+  cursor: pointer;
+
+  &:hover {
+    background-color: $white;
+  }
+}
+
+svg.MuiChip-icon.like_button {
+  margin-right: -19px;
+  margin-top: 2px;
+}
+
+.hack_input {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+input.hack_input:focus ~ label {
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.MuiTypography-root.product_description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+  justify-content: center;
+  padding: 0 8px;
+  font-weight: 400;
+  font-size: 12px;
+  color: #00254f;
+}
+
+input.hack_input:checked + p {
+  -webkit-line-clamp: unset;
+}
+
+input.hack_input:checked ~ label {
+  display: none;
+}
+
+.read_more {
+  font-size: 12px;
+  color: #0059bc;
+  padding-left: 8px;
+  cursor: pointer;
+}
+
+.MuiTypography-root.description_title {
+  margin-top: 4px;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 4px 0;
+  font-weight: 500;
+  font-size: 12px;
+  padding-left: 8px;
+}
+
+.MuiTypography-root.shipping_method {
+  justify-content: center;
+  color: #000000;
+  padding: 4px 8px;
+  font-weight: 400;
+  font-size: 10px;
+}
+
+.card_media {
+  height: 200px;
+  padding: 13px;
+  object-fit: cover;
 }

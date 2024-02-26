@@ -1,47 +1,42 @@
-import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectLikedProducts, toggleLikeProduct } from '../../config/store/likedProductsSlice'
+import CardBody from './CardBody'
 import { Chip, Card, CardMedia } from '@mui/material'
-import CartActions from './CartActions'
-import QuantityButtons from './QuantityButtons'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
-import { CardType } from '../../types/Card'
+import { ProductType } from '../../types/Product'
 
 import './ProductCard.scss'
-import CardBody from './CardBody'
 
-const ProductCard = ({ id, name, image, originalPrice, price, rating, discount }: CardType) => {
-  const [itemCount, setItemCount] = useState(0)
-  const handleIncrement = () => {
-    setItemCount((prev) => prev + 1)
+const ProductCard = ({ id, name, imageUrl, price, description, shippingMethod }: ProductType) => {
+  const dispatch = useDispatch()
+  const { likedProducts } = useSelector(selectLikedProducts)
+
+  const handleLikeClick = (event: any) => {
+    event.stopPropagation()
+    dispatch(toggleLikeProduct(id))
   }
-
-  const handleDecrement = () => {
-    setItemCount((prev) => prev - 1)
-  }
-
-  const fruitImage = image?.includes('lime')
-    ? '/lemon.png'
-    : image?.includes('strawberry')
-      ? '/strawberry.png'
-      : '/orange.png'
 
   return (
     <Card className="product_card">
-      <div className="card_media_wrapper">
-        <CardMedia
-          component="img"
-          sx={{
-            height: 200,
-            padding: '10px',
-            objectFit: 'contain'
-          }}
-          image={fruitImage}
+      <div
+        className="card_media_wrapper"
+        onClick={() => window.open('https://www.google.com/', '_blank')}>
+        <CardMedia className="card_media" component="img" image={imageUrl} />
+        <Chip
+          className="like_chip"
+          onClick={handleLikeClick}
+          icon={
+            likedProducts.includes(id) ? (
+              <FavoriteIcon className="like_button" color="error" fontSize="small" />
+            ) : (
+              <FavoriteBorderIcon className="like_button" color="disabled" fontSize="small" />
+            )
+          }
         />
-        <Chip label={discount} className="discount_chip" />
-        <CartActions {...{ id, itemCount }} />
       </div>
-      <CardBody {...{ name, rating, price, originalPrice }}>
-        <QuantityButtons {...{ itemCount, handleIncrement, handleDecrement }} />
-      </CardBody>
+      <CardBody {...{ id, name, price, description, shippingMethod }} />
     </Card>
   )
 }
