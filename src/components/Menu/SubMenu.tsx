@@ -56,7 +56,7 @@ const Image = styled(Paper)({
   top: '30px',
   width: '776px',
   height: '240px',
-  background: `url(/public/Submenu_image.jpg), rgb(217, 217, 217)`,
+  background: `url(/Submenu_image.jpg), rgb(217, 217, 217)`,
   backgroundRepeat: 'no-repeat, no-repeat',
   backgroundSize: 'cover, contain',
   backgroundPosition: 'center, center',

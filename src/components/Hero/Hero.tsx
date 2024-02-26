@@ -27,8 +27,8 @@ const Hero = () => {
             key={num}
             className="img_card"
             component="img"
-            src={`/public/Group${num}_1440.jpg`}
-            srcSet={`/public/Group${num}_480.jpg 480w, /public/Group${num}_768.jpg 768w, /public/Group${num}_1440.jpg 1280w`}
+            src={`/Group${num}_1440.jpg`}
+            srcSet={`/Group${num}_480.jpg 480w, /Group${num}_768.jpg 768w, /Group${num}_1440.jpg 1280w`}
             sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, 1280px"
             alt="Slider image"
           />

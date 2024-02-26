@@ -29,7 +29,7 @@ const Footer = () => {
             padding: '0 20px'
           }}>
           <Typography sx={{ pr: '24px', width: '170px', maxWidth: '100%' }}>
-            <img src={'/public/Logo.png'} alt="Logo" />
+            <img src={'/Logo.png'} alt="Logo" />
           </Typography>
 
           {!matchesMobile && (
