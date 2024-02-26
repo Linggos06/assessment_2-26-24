@@ -27,7 +27,7 @@ const Header = () => {
         {matchesMobile ? (
           <Box className="hamburger_menu-wrapper">
             <Typography className="logo_container" sx={{ pr: '24px' }}>
-              <img className="logo_image" src={'/public/Logo_main.png'} alt="Logo" />
+              <img className="logo_image" src={'/Logo_main.png'} alt="Logo" />
             </Typography>
             <Box>
               <IconButton
@@ -51,7 +51,7 @@ const Header = () => {
           </Box>
         ) : (
           <Typography className="logo_container" sx={{ pr: '24px' }}>
-            <img className="logo_image" src={'/public/Logo_main.png'} alt="Logo" />
+            <img className="logo_image" src={'/Logo_main.png'} alt="Logo" />
           </Typography>
         )}
         <SearchBar />
