@@ -155,6 +155,7 @@ const Footer = () => {
         container
         style={{
           display: 'flex',
+          margin: '0 auto',
           marginTop: '21px',
           width: '100%',
           maxWidth: '1200px',
